@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-account.css">
+    <title>Đăng Nhập</title>
+</head>
+<body>
+    <div class="container">
+        <div class="forwordpass">
+            <div class="content">
+                <a href="javascript:void(0)"><i class="fas fa-arrow-left"></i></a>
+                <h3>Đặt lại Mật Khẩu</h3>
+                <form action="">
+                    <div class="input-box">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Tên Đăng Nhập" required>
+                    </div>
+                    <div class="input-box">
+                        <button type="submit">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login">
+            <div class="user"></div>
+            <h3>Đăng Nhập</h3>
+            <form action="" id="login" method="post">
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Tên Đăng Nhập" required>
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Mật Khẩu" required>
+                </div>
+                <div class="input-box">
+                    <label for="keeplogin">
+                        <input type="checkbox" id="keeplogin">
+                        <span class="checkmark"></span>
+                        <span class="text">Duy Trì Đăng Nhập.</span>
+                    </label>
+                    <a href="javascript:void(0)" class="helpLink">Quên Mật Khẩu.</a>
+                </div>
+                <div class="input-box">
+                    <button type="submit">Đăng Nhập</button>
+                </div>
+            </form>
+            <div class="or">
+                <p>Hoặc</p>
+            </div>
+            <button id="go-createAccount">Đăng Ký</button>
+        </div>
+       <div class="createAccount">
+            <h3>Tạo tài Khoản Mới</h3>
+            <form action="">
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Tên Của Bạn" required>
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Tên Đăng Nhập" required>
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" placeholder="Email" required>
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Mật Khẩu" required>
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Nhập Lại Mật Khẩu" required>
+                </div>
+                <div class="input-box">
+                    <label for="agreeSecurity">
+                        <input type="checkbox" id="agreeSecurity">
+                        <span class="checkmark"></span>
+                        <span class="text">Đồng Ý Điều Khoản Về Quyền Riêng Tư.</span>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <button type="submit">Đăng Ký</button>
+                </div>
+            </form>
+            <button id="go-login">Đăng Nhập</button>
+       </div>
+    </div>
+    <script src="js/jquery/jquery.min.js"></script>
+    <script>
+        // $(document).ready(function(){
+        //     $.ajax({
+        //         url : "http://donghotinhyeu.startdeveloper.com/appMobileRequest.php?status=login",
+        //         type : "POST"
+        //     }).done(function( data ){
+        //         console.log( data );
+        //     }).fail(function(){
+
+        //     })
+        // });
+        $('.helpLink').click(function(){
+            $(".forwordpass").addClass("forwordpass-active");
+        });
+
+        $('.forwordpass a:first-child').click(function(){
+            $(".forwordpass").removeClass("forwordpass-active");
+        });
+
+        $(document).click(function(event){
+            if($(event.target).is('.forwordpass')){
+                $(".forwordpass").removeClass("forwordpass-active");
+            }
+        });
+        $('#go-createAccount').click(function(){
+            $(".login").fadeOut("fast", function(){
+                $(".createAccount").fadeIn("fast");
+            });
+        });
+
+        $('#go-login').click(function(){
+            $(".createAccount").fadeOut("fast", function(){
+                $(".login").fadeIn("fast");
+            });
+        });
+    </script>
+</body>
+</html>

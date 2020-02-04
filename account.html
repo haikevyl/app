@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/style-account.css">
     <title>Đăng Nhập</title>
 </head>
+
 <body>
     <div class="container">
         <div class="forwordpass">
@@ -31,11 +33,11 @@
             <form action="" id="login" method="post">
                 <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Tên Đăng Nhập" required>
+                    <input type="text" placeholder="Tên Đăng Nhập" required minlength="5">
                 </div>
                 <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Mật Khẩu" required>
+                    <input type="password" placeholder="Mật Khẩu" required minlength="8">
                 </div>
                 <div class="input-box">
                     <label for="keeplogin">
@@ -54,7 +56,7 @@
             </div>
             <button id="go-createAccount">Đăng Ký</button>
         </div>
-       <div class="createAccount">
+        <div class="createAccount">
             <h3>Tạo tài Khoản Mới</h3>
             <form action="">
                 <div class="input-box">
@@ -89,44 +91,68 @@
                 </div>
             </form>
             <button id="go-login">Đăng Nhập</button>
-       </div>
+        </div>
     </div>
     <script src="js/jquery/jquery.min.js"></script>
     <script>
-        // $(document).ready(function(){
-        //     $.ajax({
-        //         url : "http://donghotinhyeu.startdeveloper.com/appMobileRequest.php?status=login",
-        //         type : "POST"
-        //     }).done(function( data ){
-        //         console.log( data );
-        //     }).fail(function(){
+        $(document).ready(function () {
+            // $.ajax({
+            //     url : "http://donghotinhyeu.startdeveloper.com/appMobileRequest.php?status=login",
+            //     type : "POST"
+            // }).done(function( data ){
+            //     console.log( data );
+            // }).fail(function(){
 
-        //     })
-        // });
-        $('.helpLink').click(function(){
-            $(".forwordpass").addClass("forwordpass-active");
-        });
+            // })
+            $('.helpLink').click(function () {
+                $(".forwordpass").addClass("forwordpass-active");
+            });
 
-        $('.forwordpass a:first-child').click(function(){
-            $(".forwordpass").removeClass("forwordpass-active");
-        });
-
-        $(document).click(function(event){
-            if($(event.target).is('.forwordpass')){
+            $('.forwordpass a:first-child').click(function () {
                 $(".forwordpass").removeClass("forwordpass-active");
-            }
-        });
-        $('#go-createAccount').click(function(){
-            $(".login").fadeOut("fast", function(){
-                $(".createAccount").fadeIn("fast");
             });
-        });
 
-        $('#go-login').click(function(){
-            $(".createAccount").fadeOut("fast", function(){
-                $(".login").fadeIn("fast");
+            $(document).click(function (event) {
+                if ($(event.target).is('.forwordpass')) {
+                    $(".forwordpass").removeClass("forwordpass-active");
+                }
             });
+            $('#go-createAccount').click(function () {
+                $(".login").fadeOut("fast", function () {
+                    $(".createAccount").fadeIn("fast");
+                });
+            });
+
+            $('#go-login').click(function () {
+                $(".createAccount").fadeOut("fast", function () {
+                    $(".login").fadeIn("fast");
+                });
+            });
+
+            $("#login").submit(function (event) {
+                event.preventDefault();
+                var user = $("#login input[type=text]").val().trim();
+                var pass = $("#login input[type=password]").val().trim();
+                if (user.length >= 5 && pass.length >= 8) {
+                    $.ajax({
+                        url: "http://localhost:8888/appMobileRequest.php",
+                        type: "POST",
+                        data: {
+                            status : "login-app",
+                            username : user,
+                            password : pass
+                        }
+                    }).done(function (data) {
+                        console.log(data);
+                    }).fail(function () {
+
+                    })
+                } else {
+                    errorCallBack("Đăng Nhập Thất Bại");
+                };
+            })
         });
     </script>
 </body>
+
 </html>
